@@ -1,0 +1,196 @@
+@charset "utf-8";
+/* CSS Document */
+
+#gallerycontainer
+{
+	width:675px;
+	min-height:200px;
+	height:auto;
+}
+div.galleryalbumcontainer
+{
+	width:143px;
+	height:167px;
+	float:left;
+	margin-left:25px;
+	margin-bottom:38px;
+}
+div.galleryalbumfoldtop
+{
+	height:15px;
+}
+div.galleryalbumfoldtop div.gafold
+{
+	width:55px; 
+	height:15px; 
+	float:right;
+	background-color:#F8F8F8;
+	background-image:url(../images/albumfoldbg.jpg);
+	margin-right:12px;
+	border-top:1px solid #CCC;
+	border-left:1px solid #CCC;
+	border-right:1px solid #CCC;
+}
+div.galleryalbumfoldmain
+{
+	height:112px;
+	background-color:#F8F8F8;
+	background-image:url(../images/albumbg.jpg);
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-khtml-border-radius:10px;
+	-o-border-radius:10px;
+	box-shadow:1px 1px 3px #000;
+	-moz-box-shadow:1px 1px 3px #000;
+	-khtml-box-shadow:1px 1px 3px #000;
+	-webkit-box-shadow:1px 1px 3px #000;
+	-o-box-shadow:1px 1px 3px #000;
+	/*border:1px solid #CCC;*/
+}
+div.galleryalbumcontainer div.gaftoolspanel
+{
+	text-align:left;
+	margin-top:5px;
+}
+div.galleryalbumcontainer div.gaftoolspanel img
+{
+	float:left;
+}
+div.galleryalbumcontainer div.gaftoolspanel div
+{
+	float:left;
+	margin-top:10px;
+}
+div.galleryalbumcontainer div.gaftoolspanel a
+{
+	font-size:11px;
+	color:#005680;
+	text-decoration:none;
+	font-weight:bold;
+}
+div.galleryalbumcontainer div.gaftoolspanel a:hover
+{
+	text-decoration:underline;
+}
+div.galleryalbumsampleholder
+{
+	background-color:#FFF;
+	width:127px;
+	height:88px;
+}
+div.galleryalbumsampleimageholder
+{
+	width:114px;
+	height:76px;
+	background-color:#333;
+	overflow:hidden;
+}
+div.galleryalbumsampleimageholder img
+{
+	width:100%;
+	height:100%;
+}
+
+div.albumphotoscontentholder
+{
+	width:152px;
+	height:215px;
+	float:left;
+	margin-right:15px;
+	margin-bottom:30px;
+}
+div.albumphotoscontentholder #albumphotocontainer
+{
+	height:174px;
+	border:1px solid #F0F0F0;
+}
+div.albumphotoscontentholder #albumphotocontainer #photocontainer
+{
+	width:136px;
+	height:140px;
+	background-color:#FEFEFE;
+	overflow:hidden;
+}
+div.albumphotoscontentholder div.gaftoolspanel
+{
+	text-align:left;
+	margin-top:5px;
+}
+div.albumphotoscontentholder div.gaftoolspanel img
+{
+	float:left;
+}
+div.albumphotoscontentholder div.gaftoolspanel div
+{
+	float:left;
+	margin-top:10px;
+}
+div.albumphotoscontentholder div.gaftoolspanel a
+{
+	font-size:11px;
+	color:#005680;
+	text-decoration:none;
+	font-weight:bold;
+}
+div.albumphotoscontentholder div.gaftoolspanel a:hover
+{
+	text-decoration:underline;
+}
+#uploadedforalbumcount
+{
+	width:32px;
+	height:32px;
+	float:left;
+	background-color:#E62174;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-khtml-border-radius:5px;
+	-webkit-border-radius:5px;
+	-ms-border-radius:5px;
+	-o-border-radius:5px;
+	margin-top:25px;
+	color:#FFFFFF;
+	font-size:15px;
+	font-weight:bold;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	text-align:center;	
+}
+#uploadforalbumeditpanel
+{
+	display:none;
+	width:238px;
+	min-height:20px;
+	height:auto;
+	max-height:200px;
+	padding:0px 10px 10px 10px;
+	background-color:#FFF;
+	position:fixed;
+	z-index:10;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-khtml-border-radius:10px;
+	-o-border-radius:10px;
+	box-shadow:1px 1px 3px #000;
+	-moz-box-shadow:1px 1px 3px #000;
+	-khtml-box-shadow:1px 1px 3px #000;
+	-webkit-box-shadow:1px 1px 3px #000;
+	-o-box-shadow:1px 1px 3px #000;
+}
+#uploadforalbumeditpanel #contentholder
+{
+	width:238px;
+	min-height:20px;
+	height:auto;
+	max-height:200px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+div.fileuploadpick
+{
+	padding:5px;
+	font-weight:bold;
+	font-size:11px;
+	color:#007DB8;
+}

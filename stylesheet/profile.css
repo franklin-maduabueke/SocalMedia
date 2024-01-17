@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* CSS Document */
+
+#profiletopsection
+{
+	width:675px;
+	min-height:168px;
+	height:auto;
+	/*background-color:#666;*/
+}
+#userprofileimageholderbound
+{
+	float:left;
+	width:158px;
+	height:168px;
+	background-color:#FFF;
+	border:1px solid #F0F0F0;
+}
+#userprofileimageholder
+{
+	width:144px;
+	height:154px;
+	background-color:#FFF;
+	overflow:hidden;
+}
+#userprofileimageholder img
+{
+	width:100%;
+	height:100%;
+}
+#userprofileimagesidemaindetails
+{
+	float:right;
+	width:500px;
+	min-height:168px;
+	height:auto;
+}
+div.userprofiledetailholder
+{
+	margin-bottom:10px;
+	text-align:left;
+	line-height:20px;
+	word-wrap:break-word;
+}
+div.userprofiledetailholder label.updlabel
+{
+	font-size:13px;
+	color:#007DB8;
+	font-weight:bold;
+	float:left;
+}
+div.userprofiledetailholder label.updddata
+{
+	font-size:13px;
+	color:#000;
+	/*font-weight:bold;*/
+	margin-left:10px;
+	letter-spacing:1px;
+	float:left;
+}
+div.userprofiledetailholder input.updddata
+{
+	width:200px;
+	float:left;
+}
+div.userprofiledetailholder input.longinputbox
+{
+	width:400px;
+	float:left;
+}
+select.updddata, input.updddata
+{
+	display:none;
+	float:left;
+	margin-left:10px;
+	margin-top:-3px;
+}
+#profilemidsection
+{
+	width:675px;
+	height:auto;
+	margin-top:20px;
+}
+#userprofileimageeditbutton
+{
+	width:18px;
+	height:18px;
+	background-color:#F0F0F0;
+	position:absolute;
+	display:none;
+}
+#intrestedinoptionsholder
+{
+	 height:auto; clear:both; text-align:left; font-size:11px; padding-bottom:20px;
+}
+#intrestedinoptionsholder div.intrestitem
+{
+	float:left;
+	margin-right:20px;
+}
+#intrestedinoptionsholder label
+{
+	
+}

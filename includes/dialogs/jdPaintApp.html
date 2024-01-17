@@ -1,0 +1,436 @@
+<div id="jdPaintAppWindowContainer" align="center">
+	<div id="jdPaintAppFrame">
+    </div>
+    <div id="jdPaintAppWindow">
+    	<div id="jdPaintAppTitleBar">
+        	<div style="float:left; margin-left:18px; margin-top:14px;">Me and My Friends in College</div>
+            <div id="dlgclosebtn" class="clickable"><img src="../images/dlgclosebtn.png" id="createalbumdlgCloseBtn" /></div>
+            <div style="float:right; margin-right:45px; margin-top:14px;">May 21, 2012</div>
+            <div style="float:right; margin-right:45px; margin-top:16px; font-size:11px; font-weight:normal;" id="jdPaintAppTitleMagnification">730 x 486</div>
+        	<div style="clear:both"></div>
+        </div>
+        
+        <div id="jdPaintAppCanvasFrame">
+        	<div id="jdPaintAppSVGCanvas">
+            </div>
+        	<canvas id="paintAppCanvas">Canvas is not supported</canvas>
+        </div>
+        
+        <div id="jdPaintAppControlPanel">
+        	<div style="height:5px;"></div>
+        	<div class="jdPaintAppControlButton clickable hasToolTip" id="jdPaintAppZoomTool">
+            	<div style="height:7px;"></div>
+            	<img src="../images/paintzoom.png" />
+                <input type="hidden" class="tooltipalt" value="Zoom In/Out Tool (Press Alt on Windows or Option on Mac to Zoom out)" />
+            </div>
+            
+            <div class="jdPaintAppControlButton clickable hasToolTip" id="jdPaintAppPenTool">
+            	<div style="height:7px;"></div>
+            	<img src="../images/paintwrite.png" />
+                <input type="hidden" class="tooltipalt" value="Pen Tool (Used for drawing)" />
+            </div>
+            
+            <div class="jdPaintAppControlButton clickable hasToolTip" id="jdPaintAppTraceTool">
+            	<div style="height:4px;"></div>
+            	<img src="../images/paintsilo.png" />
+                <input type="hidden" class="tooltipalt" value="Trace Tool (Use this to trace out a silouhette of your photo)" />
+            </div>
+            
+            <div class="jdPaintAppControlButton clickable hasToolTip" id="jdPaintAppCropTool">
+            	<div style="height:4px;"></div>
+            	<img src="../images/paintcrop.png" />
+                <input type="hidden" class="tooltipalt" value="Crop Tool (Use this to crop the image on the canvas)" />
+            </div>
+            
+            <div class="jdPaintAppControlButton clickable hasToolTip" id="jdPaintAppBucketTool">
+            	<div style="height:7px;"></div>
+            	<img src="../images/paintbucket.png" />
+                <input type="hidden" class="tooltipalt" value="Canvas Background Tool (Use this to change the background color of the canvas)" />
+            </div>
+            
+            <div class="jdPaintAppControlButton clickable hasToolTip" id="jdPaintAppMaskClipartTool">
+            	<div style="height:12px;"></div>
+            	<img src="../images/paintmasks.png" />
+                <input type="hidden" class="tooltipalt" value="Mask Clipart Tool (Use this to hide your identity)" />
+            </div>
+            
+            <div class="jdPaintAppControlButton" id="jdPaintAppFillStrokeColorSelectTool">
+            	<div style="height:4px;"></div>
+            	<div class="jdPaintAppFillStrokeBox clickable hasToolTip" id="jdPaintAppFillSelector"><input type="hidden" class="tooltipalt" value="Fill color" /></div>
+                <div class="jdPaintAppFillStrokeBox clickable hasToolTip" id="jdPaintAppStrokeSelector"><input type="hidden" class="tooltipalt" value="Stroke color" /></div>
+                <div style="clear:both"></div>
+            </div>
+            
+            <div class="jdPaintAppControlButton clickable hasToolTip" id="jdPaintAppDoneButton" style="float:right; margin-right:15px;">
+            	<div style="height:6px;"></div>
+            	<img src="../images/paintdoneup.png" />
+                <input type="hidden" class="tooltipalt" value="Click to commit edits and close app" />
+            </div>
+            
+            <div style="clear:both"></div>
+        </div>
+    </div>
+</div>
+<!-- behaviour for this widget-->
+<script type="text/javascript" id="jdPaintAppScript">
+	//Event Handlers for graphic objects interaction
+	
+	//Note:I ended the use of the HTML5 canvas element for this paint program and
+	//prefer to go into the use of SVG.
+	//Author: Franklin N. Maduabueke. 
+	//Email: dueal21@yahoo.co.uk
+	
+	//onclick event handler for paths.
+	//Highlight
+	function PathOnClickHnd(event)
+	{
+		$('#jdPaintAppCanvas #svgElement').children().removeClass('selectedElement');
+		$(event.target).css('fill', '#FF0000');
+	}
+	
+	//refreshes the canvas
+	function refreshCanvas()
+	{
+		if (event.target.id == 'svgElement')
+		{
+			oldSVGDef = '';
+
+			if ($('body').data('jdPaintAppScript').canvasDataCache.length)
+			{
+				canvasDataCache = $('body').data('jdPaintAppScript').canvasDataCache;
+																		
+				for (d= 0; d < canvasDataCache.length; d++)
+					oldSVGDef += canvasDataCache[d];
+			}
+		
+			svgFormat = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgElement">';
+			svgFormat += oldSVGDef;
+			svgFormat += '</svg>';
+																	
+			$('#jdPaintAppSVGCanvas svg').remove();
+			$('#jdPaintAppSVGCanvas').append(svgFormat);
+																	
+			$('div.toolMarkerDots').remove();
+		}
+	}
+	
+	function onCanvasResize(event)
+	{
+		$('#jdPaintAppTitleMagnification').html($('#jdPaintAppSVGCanvas').width() + " x " + $('#jdPaintAppSVGCanvas').height());
+	}
+	
+	
+	//on mouse over of any graphics object highlight border and points
+	function onGraphicObjectMouseOver(event)
+	{
+		switch (event.target.tagName)
+		{
+			case 'path':
+				//alert('mouseover');
+				points = $(event.target).attr('d');
+				regx = /[MLZ]/g;
+				points = points.replace(regx, '');
+				points = $.trim(points);
+				pointsArray = points.split(' ');
+				//('Extracted ' + points);
+				if ((pointsArray.length % 2) == 0) //even check
+				{
+					//alert('Rendering points');
+					for (i = 0; i < pointsArray.length - 1;)
+					{
+						$('body').append('<div class="toolMarkerDotsRedHead"></div>');
+						$('div.toolMarkerDotsRedHead:last').css({
+														 'left': eval(pointsArray[i] + '+' + $('#jdPaintAppSVGCanvas').offset().left) - $(document).scrollLeft() - 2 + 'px',
+														 'top': eval(pointsArray[i + 1] + '+' + $('#jdPaintAppSVGCanvas').offset().top) - $(document).scrollTop() - 2 + 'px'
+														});
+						
+						i += 2;
+					}
+				}
+			break;
+		}
+	}
+	
+	//on mouse out of any graphics object removehighligh border and points
+	function onGraphicObjectMouseOut(event)
+	{
+		$('div.toolMarkerDotsRedHead').remove();
+	}
+	
+	//all tools operation occurs here using switch.
+	//this is not a very clean design as i could have used classes for tools
+	//@param currentTool: the current tool selected by the user.
+	function jdPaintAppToolsOperation(currentTool)
+	{
+		if (currentTool != null)
+		{												  
+			switch (currentTool.id)
+			{
+				case 'jdPaintAppTraceTool':
+					//if we havnt started the drowing operation on the canvas then we have no data.
+					//start the drawing.
+					if ($('body').data('jdPaintAppScript').activetoolData == null)
+					{
+						//remove handler for initialisation after startpoint made
+						//operations for drawing using the 'svgCanvas'
+						$('#jdPaintAppSVGCanvas').click( function (event) {
+															  canvasDefaultAspectRation = $('body').data('jdPaintAppScript').canvasDefaultAspectRation;
+															  canvasWidth = $(this).width();
+															  canvasHeight = $(this).height();
+															  
+															  canvasCoordX = event.clientX - $('#jdPaintAppSVGCanvas').offset().left + $(document).scrollLeft();
+															  canvasCoordY = event.clientY - $('#jdPaintAppSVGCanvas').offset().top + $(document).scrollTop();
+															  
+															  if ($('body').data('jdPaintAppScript').activetoolData == null)
+															  {
+															  		$('body').data('jdPaintAppScript').activetoolData = {
+																  				'startPoint': {'x': canvasCoordX, 'y': canvasCoordY},
+																				'points': [], //the collection of points to draw the svg.
+																				'strokeStyle': '#000000',
+																				'fillStyle': '#000000',
+																				'lineWidth': 2,
+																				'initfunc': function (event) {
+																								$('body').append('<div class="toolMarkerDots"><div class="toolMarkerLabel">Start point</div></div>');
+																								$('div.toolMarkerDots:last').css({'top': event.clientY - 2 + 'px',
+																													    'left': event.clientX - 2 + 'px'
+																													  });
+															  								},
+																				'finishfunc': function (event) {
+																								//called to clean up
+																							}
+															  					};
+																				
+																	$('body').data('jdPaintAppScript').activetoolData.initfunc(event); //call to initialize.
+																	$($('body').data('jdPaintAppScript').activetool).removeClass('clickable'); //stop deactivation of this tool by clicking on it. tools can be deactivated when operation is complete or ESC key (27) is pressed while tool is active.
+																	return;
+															  }
+															  
+															  //alert("Drawing line");
+															  //context previously set
+															  try
+															  {
+															  	//check if we are close to the start to end drawing using circle collision detection
+																//alert("Start point = (" + $('body').data('jdPaintAppScript').activetoolData.startPoint.x + ", " + $('body').data('jdPaintAppScript').activetoolData.startPoint.y + ") Canvas coord = (" + canvasCoordX + ", " + canvasCoordY + ")");
+																
+																
+															  	var pointXDiff = $('body').data('jdPaintAppScript').activetoolData.startPoint.x - canvasCoordX; //make positive.
+															  	var pointYDiff = $('body').data('jdPaintAppScript').activetoolData.startPoint.y - canvasCoordY; //make positive
+															  
+															  	if (pointXDiff < 0) pointXDiff = -1 * pointXDiff;
+															  	if (pointYDiff < 0) pointYDiff = -1 * pointYDiff;
+															  
+															  	//alert('Points x = ' + pointXDiff + ' , y = ' + pointYDiff);
+															  	distanceBtwPoints = Math.sqrt((pointXDiff * pointXDiff) + (pointYDiff * pointYDiff));
+															  	radius = 10;
+																
+															  	//alert('distance = ' + distanceBtwPoints);
+															  	if (distanceBtwPoints <= radius * 2)
+															  	{
+																  	//end the drawing process.
+																  	//alert('Closing path ' + distanceBtwPoints);
+																	oldSVGDef = '';
+
+																	if ($('body').data('jdPaintAppScript').canvasDataCache.length)
+																	{
+																		canvasDataCache = $('body').data('jdPaintAppScript').canvasDataCache;
+																		
+																		for (d= 0; d < canvasDataCache.length; d++)
+																			oldSVGDef += canvasDataCache[d];
+																	}
+																	
+																	//close path.
+																	svgFormat = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgElement">';
+																	svgFormat += oldSVGDef;
+																	pathDef = '<path d="M' + $('body').data('jdPaintAppScript').activetoolData.startPoint.x;
+																	pathDef += ' ' + $('body').data('jdPaintAppScript').activetoolData.startPoint.y; 
+																	
+																	for (i = 0; i < $('body').data('jdPaintAppScript').activetoolData.points.length; i++)
+																		pathDef += ' L' +  $('body').data('jdPaintAppScript').activetoolData.points[i].px + ' ' + $('body').data('jdPaintAppScript').activetoolData.points[i].py;
+																	fillColor = $('body').data('jdPaintAppScript').activetoolData.fillStyle;
+																	strokeColor = $('body').data('jdPaintAppScript').activetoolData.strokeStyle;
+																	
+																	pathDef += ' Z"';
+																	pathDef += ' fill="#000"';
+																	pathDef += ' stroke="#000"';
+																	pathDef += ' stroke-width="2"';
+																	pathDef += ' id="path' + (++($('body').data('jdPaintAppScript').counter)) + '"';
+																	pathDef += ' onclick="PathOnClickHnd(event)"';
+																	pathDef += ' onmouseover="onGraphicObjectMouseOver(event)"';
+																	pathDef += ' onmouseout="onGraphicObjectMouseOut(event)"';
+																	pathDef += ' class="clickable"';
+																	pathDef += ' />';
+																	
+																	svgFormat += pathDef + '</svg>';
+																	
+																	$('body').data('jdPaintAppScript').canvasDataCache.push(pathDef);
+																	
+																	$('#jdPaintAppSVGCanvas svg').remove();
+																	$('#jdPaintAppSVGCanvas').append(svgFormat);
+																	
+																    $('div.toolMarkerDots').remove();
+																  	$($('body').data('jdPaintAppScript').activetool).removeClass('jdPaintAppControlButtonActivated').addClass('clickable');
+																  	$('body').data('jdPaintAppScript').activetool = null;
+																  	$('body').data('jdPaintAppScript').activetoolData = null;
+																  	$(this).unbind('click');
+																	//rebind click on canvas for refresh
+																	$(this).bind('click', refreshCanvas);
+															  	}
+															  	else
+															  	{
+																	$('body').append('<div class="toolMarkerDots"></div>');
+																	$('div.toolMarkerDots:last').css({'top': event.clientY - 2 + 'px',
+																							'left': event.clientX - 2 + 'px'
+																						   });
+																	
+																	//save the point.
+																	lineTo = {'px': canvasCoordX, 'py': canvasCoordY};
+																	$('body').data('jdPaintAppScript').activetoolData.points.push(lineTo);
+																	
+																	//add traceline
+																	if ($('body').data('jdPaintAppScript').activetoolData.points.length > 0)
+																	{
+																		oldSVGDef = '';
+
+																		if ($('body').data('jdPaintAppScript').canvasDataCache.length)
+																		{
+																			canvasDataCache = $('body').data('jdPaintAppScript').canvasDataCache;
+																		
+																			for (d= 0; d < canvasDataCache.length; d++)
+																				oldSVGDef += canvasDataCache[d];
+																		}
+																	
+																		//close path.
+																		svgFormat = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgElement">';
+																		svgFormat += oldSVGDef;
+																		polylineDef = '<polyline class="jdPaintAppDrawTraceLine" points="';
+																		polylineDef += $('body').data('jdPaintAppScript').activetoolData.startPoint.x;
+																		polylineDef += ' ' + $('body').data('jdPaintAppScript').activetoolData.startPoint.y;
+																		
+																		for (j = 0; j < $('body').data('jdPaintAppScript').activetoolData.points.length; j++)
+																		{
+																			polylineDef += ' ' + $('body').data('jdPaintAppScript').activetoolData.points[j].px;
+																			polylineDef += ' ' + $('body').data('jdPaintAppScript').activetoolData.points[j].py;
+																		}
+																		
+																		polylineDef += '" />';
+																		svgFormat += polylineDef + '</svg>';
+																		
+																		$('#jdPaintAppSVGCanvas svg').remove();
+																		$('#jdPaintAppSVGCanvas').append(svgFormat);
+																	}
+															  	}
+															  }
+															  catch (e)
+															  {
+																  alert("Exception occured " + e.message);
+															  }
+						});
+					}
+				break;
+			}
+		}
+	}
+	
+	//app surface behaviour
+	//initialize the app
+	function jdPaintAppScriptInit() {
+		windowLeftCenter = $(window).width() / 2;
+		paintAppLeftCenter = $('#jdPaintAppWindowContainer').width() / 2;
+	
+		//setup the ui
+		$('#jdPaintAppFrame').css({'opacity': 0.89});
+		$('#jdPaintAppWindowContainer').css({
+										'position': 'fixed',
+										'top': '0px',
+										'left': Math.ceil(windowLeftCenter - paintAppLeftCenter) + 'px',
+										'z-index': 6
+										});
+	
+		//on resize of window.
+		//make position fixed if window height is enough for this app window
+		//else make it absoulte and let it follow
+		$(window).resize( function () {
+								windowLeftCenter = $(window).width() / 2;
+								paintAppLeftCenter = $('#jdPaintAppWindowContainer').width() / 2;
+								$('#jdPaintAppWindowContainer').css({
+										'position': 'fixed',
+										'top': '0px',
+										'left': Math.ceil(windowLeftCenter - paintAppLeftCenter) + 'px',
+										'z-index': 6
+										});
+								});
+		
+		//activate a tool behaviour
+		$('div.jdPaintAppControlButton:not(:has(#jdPaintAppFillSelector, #jdPaintAppStrokeSelector))').click( function () {
+																														
+										if (!$(this).hasClass('clickable')) //stop deactivation of tools by click of same tool
+											return;
+											
+										$('div.jdPaintAppControlButton').removeClass('jdPaintAppControlButtonActivated');
+										
+										if (!$(this).hasClass('jdPaintAppControlButtonActivated'))
+										{
+											$(this).addClass('jdPaintAppControlButtonActivated');
+											$('body').data('jdPaintAppScript').activetool = this;
+											
+											try
+											{
+												//$('body').data('jdPaintAppScript').canvas2dContext = $('#paintAppCanvas')[0].getContext('2d');
+												try
+												{
+													$('#jdPaintAppSVGCanvas').unbind('click', refreshCanvas);
+												}
+												catch (e)
+												{
+												}
+												
+												jdPaintAppToolsOperation($('body').data('jdPaintAppScript').activetool); //call tool operations for current tool
+											}
+											catch (e)
+											{
+												alert("Unable to get canvas context");
+											}
+										}
+							 });
+		
+		//fill and stroke tools behaviour
+		$('#jdPaintAppFillSelector, #jdPaintAppStrokeSelector').click( function () {
+																				 switch (this.id)
+																				 {
+																					case 'jdPaintAppFillSelector':
+																					 	$(this).css('z-index', 8);
+																						$('#jdPaintAppStrokeSelector').css('z-index', 7);
+																						break;
+																					case 'jdPaintAppStrokeSelector':
+																						$(this).css('z-index', 8);
+																						$('#jdPaintAppFillSelector').css('z-index', 7);
+																						break;
+																				 }
+																				 });
+		
+		//start the operation of the tool when we enter the canvas area
+		//we could just show the cursor of the representing the tool
+		$('#jdPaintAppSVGCanvas').resize( function (event) {
+													onCanvasResize(event);
+													});
+	}
+	
+	
+	$('body').data('jdPaintAppScript', {
+				   						'init': jdPaintAppScriptInit, //initialization for the app. was called 'behaviour'
+										'canvasDefaultAspectRation': {'w': $('#jdPaintAppSVGCanvas').width(), 'h': $('#jdPaintAppSVGCanvas').height()}, //{'w': 300, 'h': 150}, //2:1
+				   						'activetool': null, //indicates the currently active tool
+										'activetoolData': null, //data used by a tool is stored here object/Array/any type
+										'canvasDataCache': [], //cache of all rendered objects
+										'counter': 0, //counter to give unique id to redered objects
+										'canvas2dContext': null, //hold the context of the HTML5Canvas for drawing.
+										'appCleanup': function () {
+											//cleanup operation for the app when we are done
+										}
+	}); //register this function as a data for body and remove it on cleanup of the paint app.
+	
+	
+	$('body').data('jdPaintAppScript').init();
+	
+	rebindToolTipEventHandler(); //call to rebind handler for tool tip action
+</script>

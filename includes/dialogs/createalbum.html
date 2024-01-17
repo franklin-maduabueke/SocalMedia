@@ -1,0 +1,99 @@
+<div id="dlgUploadImageHolder" align="center" class="jdWebDialogWidget">
+	<div id="dlgheading">
+    	<div id="dlgtitle">CREATE AN ALBUM</div>
+        <div id="dlgclosebtn" class="clickable"><img src="../images/dlgclosebtn.png" id="createalbumdlgCloseBtn" /></div>
+        <div style="clear:both"></div>
+    </div>
+     <div style="clear:both"></div>
+    <div id="dlgbody">
+    	<div style="height:15px"></div>
+    	<div id="dlgcontentbound">
+        	<div id="dlgdescriptionholder">You can create an album by providing a name for it.</div>
+            <div style="height:12px"></div>
+            <div id="dlgcontrolsholder">
+            	<div id="dlgiconholder">
+                	<img src="../images/createalbumimg.png" />
+                </div>
+                <div id="dlgmaincontrols">
+                	<div style="height:10px;"></div>
+                	<div style="text-align:left;">
+                    	<label style="color:#333333; font-size:15px; text-shadow:1px 1px 2px #FFF;">Album name:</label>
+                        <label style="color:#333333; font-size:15px; text-shadow:1px 1px 2px #FFF; display:none;" id="albumnamechoicelabel"></label>
+                        <input type="text" style="width:212px; height:25px; display:none;" id="albumnamechoiceinputbox" />
+                    </div>
+                    <div style="text-align:right; margin-top:10px;">
+                    	<img src="../images/addbtn.png" class="clickable" id="createalbumdlgCreateBtn" />
+                    	<img src="../images/okbtn.png" class="clickable" id="createalbumdlgSubmitBtn" />
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- behaviour for this widget-->
+<script type="text/javascript" id="createalbumscript">
+	//intialization function for dialog
+	function jdCreateAlbumDialogInit()
+	{
+		//set position
+		var windowWidth = $(window).width();
+		var windowHeight = $(window).height();
+		var dlg = $('#dlgUploadImageHolder');
+		var dlgWidth = dlg.width();
+		var dlgHeight = dlg.height();
+		var top = Math.ceil((windowHeight / 2) - (dlgHeight / 2)) + 'px';
+		var left = Math.ceil((windowWidth / 2) - (dlgWidth / 2)) + 'px';
+		
+		$('#dlgUploadImageHolder').css({
+									   'position': 'fixed',
+									   'top': top,
+									   'left': left,
+									   'z-index': 10
+									   });
+	}
+	
+	$('#createalbumdlgCreateBtn').click( function () {
+												   $('#albumnamechoiceinputbox').css('display', 'block');
+												   });
+	
+	$('#createalbumdlgSubmitBtn').click( function () {
+									   var albumname = $('#albumnamechoiceinputbox').val();
+									   $('#albumnamechoiceinputbox').css('display', 'none');
+									   $('#albumnamechoicelabel').css('display', 'block');
+									   
+									   if ($.trim(albumname).length)
+									   		$.post(pagePathPrefix + 'processing/createNewAlbum.php',
+											  {'albumname': albumname},
+											  function (jsonString) {
+												  if (jsonString)
+												  {
+													  try
+													  {
+														 json = $.parseJSON(jsonString);
+														 if (json.success)
+														 {
+															$('body').data('DialogManager').hideDialog("createalbum");
+															hidePopper();
+															//refresh page
+															window.location.reload();
+														 }
+													  }
+													  catch (e)
+													  {
+													  }
+												  }
+											  });
+									   });
+	
+	$('#createalbumdlgCloseBtn').click( function () {
+									   		$('body').data('DialogManager').hideDialog("createalbum");
+											hidePopper();
+									   });
+	
+	$('body').data("jdCreateAlbumDialogScript", 
+				   {"init": jdCreateAlbumDialogInit //initialization for the dialog
+				   });
+	
+	$('body').data("jdCreateAlbumDialogScript").init();
+</script>

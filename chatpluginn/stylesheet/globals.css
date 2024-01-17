@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+
+body
+{
+	margin:0px;
+	padding:0px;
+}
+.clickable
+{
+	cursor:pointer;
+}
+#pageContainer
+{
+	width:auto;
+	height:auto;
+}
+#chatScreenContainer
+{
+	width:300px;
+	height:120px;
+	background-color:#333;
+	position:fixed;
+	z-index:5000px;
+	overflow-y:auto;
+	overflow-x:hidden;
+	background-attachment:scroll;
+}

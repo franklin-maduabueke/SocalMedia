@@ -1,0 +1,36 @@
+@charset "utf-8";
+/* CSS Document */
+
+div.friendpanel
+{
+	width:675px;
+	height:130px;
+	margin-bottom:10px;
+	border-bottom:1px solid #F0F0F0;
+}
+div.friendpanel #friendthumnailholder
+{
+	float:left;
+	width:108px;
+	height:115px;
+	border:1px solid #F0F0F0;
+}
+div.friendpanel #frienddetailsholder
+{
+	float:left;
+	width:550px;
+	height:115px;
+	margin-left:10px;
+	text-align:left;
+	font-size:13px;
+	font-weight:bold;
+	color:#333333;
+}
+div.friendpanel #friendthumnailimgholder
+{
+	width:98px;
+	height:104px;
+	background-color:#F0F0F0;
+	overflow:hidden;
+	-ms-overflow:hidden;
+}

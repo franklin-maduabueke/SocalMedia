@@ -1,0 +1,5 @@
+HOW TO TRANSLATE THE MOUSE CLIENT POS TO THE CANVAS'S COORDS POS
+----------------------------------------------------------------
+Mouse clientX / clientY is relative to the window viewport. So to get the position of the mouse with respect to the document add scrollTop + clientY or scrollLeft + clientX.
+
+To get the position of the mouse in the canvas' coord system subtract MousePositonRelativeToDocument from canvas top / left position

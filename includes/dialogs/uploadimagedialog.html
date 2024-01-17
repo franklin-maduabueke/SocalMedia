@@ -1,0 +1,275 @@
+<div id="dlgUploadImageHolder" align="center" class="jdWebDialogWidget">
+	<div id="dlgheading">
+    	<div id="dlgtitle">UPLOAD IMAGES</div>
+        <div id="dlgclosebtn" class="clickable"><img src="../images/dlgclosebtn.png" /></div>
+        <div style="clear:both"></div>
+    </div>
+     <div style="clear:both"></div>
+    <div id="dlgbody">
+    	<div style="height:15px"></div>
+    	<div id="dlgcontentbound">
+        	<div id="dlgdescriptionholder">You can upload images in jpeg(jpg), png, gif, and bmp formats</div>
+            <div style="height:12px"></div>
+            <div id="dlgcontrolsholder">
+            	<div id="dlgiconholder">
+                	<img src="../images/uploadimgicon.png" />
+                </div>
+                <div id="dlgmaincontrols">
+                	<select id="uploadedfilecollection" style="display:none;"></select>
+					<div style="height:10px;"></div>
+                	<div style="text-align:left;">
+                    	<div style="color:#333333; font-size:12px; text-shadow:1px 1px 2px #FFF; font-weight:bold;">File name: <label id="fileuploadedname"></label></div>
+                        <label style="color:#333333; font-size:15px; text-shadow:1px 1px 2px #FFF; display:none;" id="albumnamechoicelabel"></label>
+                        <label style="width:212px; height:25px; display:none;" id="uploadfilesname"></label>
+                    </div>
+                    <div style="text-align:right; margin-top:10px;">
+                    	<img src="../images/addbtn.png" class="clickable" id="addphotofileBtn" />
+						<img src="../images/cancelbtn.png" class="clickable" id="clearphotofilesBtn" />
+                    	<img src="../images/okbtn.png" class="clickable" id="uploadalbumPhotoSubmitBtn" />
+						<div id="uploadedforalbumcount">
+							<div style="margin-top:5px;"><a href="#" id="fileobjindicator" style="color:inherit; font-size:inherit; text-decoration:none;">n</a></div>
+						</div>
+						<div style="clear:both"></div>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+	<div style="width:1px; height:1px; overflow:hidden;">
+		<form method="post" action="../processing/addPhotoToAlbum.php" target="uploadAlbumPhotoProcessingIframe" enctype="multipart/form-data" id="uploadphototoalbumform">
+			<input type="hidden" id="albumid" name="albumid" value="" />
+			<!-- dynamic create file elements -->
+			<iframe src="../processing/addPhotoToAlbum.php" name="uploadAlbumPhotoProcessingIframe" style="display:none">
+			</iframe>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	//intialization function for dialog
+	function jdUploadPhotoAlbumDialogInit()
+	{
+		//set position
+		var windowWidth = $(window).width();
+		var windowHeight = $(window).height();
+		var dlg = $('#dlgUploadImageHolder');
+		var dlgWidth = dlg.width();
+		var dlgHeight = dlg.height();
+		var top = Math.ceil((windowHeight / 2) - (dlgHeight / 2)) + 'px';
+		var left = Math.ceil((windowWidth / 2) - (dlgWidth / 2)) + 'px';
+		
+		$('#dlgUploadImageHolder').css({
+									   'position': 'fixed',
+									   'top': top,
+									   'left': left,
+									   'z-index': 10
+									   });
+	}
+	
+	$('#dlgclosebtn').click( function () {
+								$('#uploadforalbumeditpanel').remove();
+								$('body').data('DialogManager').hideDialog("uploadimagedialog");
+								hidePopper();
+	});
+	
+	$('#addphotofileBtn').click( function () {
+								  $(this).css('visibility', 'hidden');
+								  //add file object
+								  var fileobjcount =  $('#uploadphototoalbumform input[type=file]').length;
+								  var fileObjDef = '<input type="file" name="albumphotofile[]" id="file' + fileobjcount + '" style="visibility:visible;" />';
+								 
+								  $('#uploadphototoalbumform').append(fileObjDef);
+								  var fileobj = $('#uploadphototoalbumform input[type=file]:last');
+								  alert("Please select image file(s) only.");
+								  fileobj.change( function () {
+								  		if ($(this).val().length)
+										{
+											var filename = $(this).val();
+											if ((pos = filename.lastIndexOf("\\")) != -1)
+											{
+												filename = filename.substr(pos + 1);
+											}
+											
+											$('#fileuploadedname').text(filename);
+											
+											$('#uploadedfilecollection').append('<option value="' + filename + '#op' + fileobjcount + '"">' + filename + '</option>');
+											
+											$('#uploadedforalbumcount div a').text(fileobjcount + 1);
+										}
+										//increase count for file selected for upload
+								  });
+								  
+								  fileobj.click();
+								  $(this).css('visibility', 'visible');
+	});
+	
+	$('#uploadedforalbumcount div a').click( function (event) {
+					event.preventDefault();
+					var fileobjcount =  $('#uploadphototoalbumform input[type=file]').length;
+					
+					if (fileobjcount > 0)
+					{
+						//show edit panel
+						var panelDef = '<div id="uploadforalbumeditpanel"><div class="clickable" id="closeimageuploadeditpanel" style="position:absolute; top:-10px; left: 238px;"><img src="../images/dlgclosebtn.png" /></div><div style="clear:both; height:10px;"></div><div id="contentholder"></div></div>';
+						$('body').append(panelDef);
+						
+						var editpanel = $('#uploadforalbumeditpanel');
+						
+						editpanel.css({
+									  'display': 'block',
+									  'top': $(this).parent().parent().offset().top - 20 + 'px',
+									  'left': $(this).parent().parent().offset().left + 'px'
+									  });
+						
+						$('#uploadedfilecollection option').each( function (index) {
+															var filename = $(this).val();
+															var pos = filename.indexOf('#op');
+															filename = filename.substr(0, pos);
+															
+															editpanel.children('#contentholder').append('<div class="fileuploadpick"><a href="#' + index + '" style="color:inherit; font-size:10px;" class="deletefileobjlink">[Delete]</a> ' + filename + '</div>');
+						});
+						
+						$('#closeimageuploadeditpanel').click( function () {
+											$('#uploadforalbumeditpanel').remove();
+						});
+						
+						$('a.deletefileobjlink').click(function () {
+										if (confirm("Do you want to delete this file?"))
+										{
+											var idx = $(this).attr('href').substr(1);
+											var deleteLink = $(this);
+											
+											$('#uploadedfilecollection option').each( function (index) {
+														var opIdx = $(this).val();
+														var pos = opIdx.indexOf('#op');
+														opIdx = opIdx.substr(pos + 3);
+														//alert(opIdx);
+														if (opIdx == idx) //read the index of option element id prefixed by 'op'
+														{
+															//alert("Removing link");
+															$(this).remove();
+															deleteLink.parent().remove();
+															
+															$('#uploadphototoalbumform input[type=file]')
+															.each(function (fileidx) {
+																	var fileIdx = $(this).attr('id').substr(4);
+																	if (fileIdx == idx)
+																	{
+																		//alert("Removing file obj");
+																		$(this).remove();
+																		return false;
+																	}
+															});
+															
+															return false;
+														}
+											});
+											
+											var fileobjcount =  $('#uploadphototoalbumform input[type=file]').length;
+											
+											if (fileobjcount > 0)
+											{
+												 $('#uploadedforalbumcount div a').text(fileobjcount);
+												 var filename = $('#uploadedfilecollection option:last').val();
+												 var pos = filename.indexOf('#op');
+												 filename = filename.substr(0, pos);
+												 $('#fileuploadedname').text(filename);
+											}
+											else
+											{
+												 $('#uploadedforalbumcount div a').text('n');
+												 $('#fileuploadedname').text('');
+											}
+														
+											if ($('div.fileuploadpick').length == 0)
+											{
+												//alert("Closing edit panel");
+												$('#closeimageuploadeditpanel').click();
+											}
+										}
+						});
+					}
+	});
+	
+	//clear the collection of selected files for uploading
+	$('#clearphotofilesBtn').click(function () {
+			$(this).css('visibility', 'hidden');
+			$('#uploadalbumPhotoSubmitBtn').css('visibility', 'hidden');
+			
+			if ($('#uploadphototoalbumform input[type=file]').length && confirm("Do you want to remove all selected files?"))
+			{
+				 $('#uploadphototoalbumform input[type=file]').remove();
+				 $('#uploadedfilecollection option').remove();
+				 $('#uploadedforalbumcount div a').text('n');
+				 $('#fileuploadedname').text('');
+			}
+			
+			$(this).css('visibility', 'visible');
+			$('#uploadalbumPhotoSubmitBtn').css('visibility', 'visible');
+	});
+	
+	//sequentially submits files selected for upload to the server
+	//can make a progress bar using this
+	$('#uploadalbumPhotoSubmitBtn').click(function () {
+			
+			if ($('#uploadphototoalbumform input[type=file]').length && confirm("Do you want to upload all selected files?"))
+			{
+				 $(this).css('visibility', 'hidden');
+				$('#clearphotofilesBtn').css('visibility', 'hidden');
+				$('#addphotofileBtn').css('visibility', 'hidden');
+				
+				 $('#albumid').val($('#galleryCurrentAlbumID').val());
+				 //upload sequentially and provide a progress bar.
+				 $('body').data('GalleryUploadFiles', $('#uploadphototoalbumform input[type=file]'));
+				 $('#uploadphototoalbumform input[type=file]').remove();
+				 
+				 var filecount =  $('body').data('GalleryUploadFiles').length;
+				 $('#uploadphototoalbumform').append($('body').data('GalleryUploadFiles')[0]);
+				 
+				 $('body').data('GalleryUploadFilesTotal', filecount);
+				 $('body').data('GalleryUploadFiles', $('body').data('GalleryUploadFiles').slice(1));
+																									
+				 $('iframe[name=uploadAlbumPhotoProcessingIframe]').load( function () {
+						if ($('body').data('GalleryUploadFiles').length > 0)
+						{
+							var filecount =  $('body').data('GalleryUploadFiles').length;
+							$('#uploadphototoalbumform input[type=file]').remove();
+							$('#uploadphototoalbumform').append($('body').data('GalleryUploadFiles')[0]);
+							
+							$('body').data('GalleryUploadFiles', $('body').data('GalleryUploadFiles').slice(1));
+							var totalcount = $('body').data('GalleryUploadFilesTotal');
+							var percentUploaded = Math.ceil(((totalcount - filecount) / totalcount) * 100);
+							
+							$('#gphotouploadProgresssIndicator').text('Uploading: Progress ' + percentUploaded + '%');
+							$('#uploadphototoalbumform').submit();
+						}
+						else
+						{
+							//alert("Complete");
+							$('#dlgclosebtn').click();
+							$('#uploadphototoalbumlink').css('display', 'block');
+				 			$('#gphotouploadProgresssIndicator').css('display', 'none');
+							
+							//do ajax reload of gallery images here.
+							window.location.reload();
+						}
+				 });
+				 
+				 hidePopper();
+				 $('#dlgUploadImageHolder').css('visibility', 'hidden');
+				 
+				 $('#uploadphototoalbumlink').css('display', 'none');
+				 $('#gphotouploadProgresssIndicator').css('display', 'block').text('Uploading: Progress 0%');
+				 $('#uploadphototoalbumform').submit();
+			}
+			
+			//$(this).css('visibility', 'visible');
+			//$('#clearphotofilesBtn').css('visibility', 'visible');
+	});
+	
+	$('body').data("jdUploadPhotoAlbumcDialogScript", 
+				   {"init": jdUploadPhotoAlbumDialogInit //initialization for the dialog
+				   });
+	
+	$('body').data("jdUploadPhotoAlbumcDialogScript").init();
+</script>

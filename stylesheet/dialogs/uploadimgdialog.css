@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+
+#dlgUploadImageHolder
+{
+	width:540px;
+	min-height:252px;
+	height:auto;
+	background-color:#000;
+	border-radius:15px;
+	-webkit-border-radius:15px;
+	-khtml-border-radius:15px;
+	-moz-border-radius:15px;
+	-o-border-radius:15px;
+	-ms-border-radius:15px;
+	overflow:hidden;
+}
+#dlgUploadImageHolder #dlgheading
+{
+	height:30px; width:511px;
+}
+#dlgUploadImageHolder #dlgheading #dlgtitle
+{
+	width:auto; height:auto; float:left; text-align:left; color:#FFF; font-size:15px; margin-top:7px
+}
+#dlgUploadImageHolder #dlgheading #dlgclosebtn
+{
+	width:auto; height:auto; float:right;
+}
+#dlgUploadImageHolder #dlgbody
+{
+	width:511px;
+	height:203px;
+	background-color:#B9B7B8;
+	background-image:url(../../images/uploaddlgbg.jpg);
+}
+#dlgUploadImageHolder #dlgbody #dlgcontentbound
+{
+	width:485px;
+	min-height:160px;
+	height:auto;
+}
+#dlgUploadImageHolder #dlgbody #dlgcontentbound #dlgdescriptionholder
+{
+	font-size:14px;
+	color:#333333;
+	text-shadow:1px 1px 2px #FFF;
+	text-align:left;
+}
+#dlgUploadImageHolder #dlgbody #dlgcontentbound #dlgcontrolsholder
+{
+	height:130px;
+}
+#dlgUploadImageHolder #dlgbody #dlgcontentbound #dlgcontrolsholder #dlgiconholder
+{
+	float:left;
+	width:134px;
+	height:118px;
+}
+#dlgUploadImageHolder #dlgbody #dlgcontentbound #dlgcontrolsholder #dlgmaincontrols
+{
+	width:328px;
+	height:130px;
+	/*background-color:#FFF;*/
+	float:right;
+}

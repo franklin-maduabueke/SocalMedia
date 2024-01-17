@@ -1,0 +1,135 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face
+{
+	font-family:sitefont;
+	src:url("../customfonts/Y2K_neophyte.ttf"), url("../customfonts/Y2K_neophyte.eot");
+	font-weight:bold;
+}
+@font-face
+{
+	font-family:trajanprobold;
+	src:url("../customfonts/TrajanPro-Bold.otf");
+	font-weight:bold;
+}
+
+body
+{
+	margin:0px;
+	padding:0px;
+	font-family:Verdana, Geneva, sans-serif;
+	background-color:#fff;
+}
+.clickable
+{
+	cursor:pointer;
+}
+#pageContainer
+{
+	background-color:#007DB8;
+}
+#mainContentHolder
+{
+	width:950px;
+	min-height:730px;
+	height:auto;
+}
+#headerHolder
+{
+	width:950px;
+	height:75px;
+	background-color:#95004A;
+}
+#logoholder
+{
+	float:left;
+	width:auto;
+	height:58px;
+	padding-top:8px;
+}
+#headerrightcol
+{
+	width:500px;
+	height:inherit;
+	float:right;
+}
+#footer
+{
+	height:50px;
+	background-color:#0F0F0F;
+	color:#FFF;
+	font-size:11px;
+}
+#footer label
+{
+	margin-left:10px;
+	margin-right:10px;
+}
+#footer a
+{
+	color:#FFF;
+	font-size:11px;
+	text-decoration:none;
+}
+#footer a:hover
+{
+	text-decoration:underline;
+}
+div.toolTip
+{
+	/*border:1px solid #CCCCCC;*/
+	font-size:11px;
+	color:#FFF;
+	padding-top:3px; padding-bottom:3px; padding-left:5px;  padding-right:5px;
+	position:absolute;
+	z-index:100;
+	background-color:#1F191B;
+	background-image:url(../chatplugin/images/tooltipbg.jpg);
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-khtml-border-radius:5px;
+	-ms-border-radius:5px;
+	-o-border-radius:5px;
+	-moz-border-radius:5px;
+	font-family:Arial, Helvetica, sans-serif;
+	display:none;
+}
+div#pageinatepanel
+{
+	width:675px;
+	min-height:32px;
+	height:auto;
+}
+div#pageinatepanel div.pageinatebutton
+{
+	width:32px;
+	height:32px;
+	color:#FFF;
+	font-size:14px;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-khtml-border-radius:5px;
+	-o-border-radius:5px;
+	float:left;
+	margin-right:8px;
+}
+div#pageinatepanel div.pageavtive
+{
+	background-color:#007DB8;
+}
+div#pageinatepanel div.pageinavtive
+{
+	background-color:#E62174;
+}
+div#pageinatepanel div.pageinavtive:hover
+{
+	background-color:#3B9BC8;
+}
+div#pageinatepanel div.pageinatebutton a
+{
+	color:#FFF;
+	font-size:14px;
+	text-decoration:none;
+	display:block;
+}

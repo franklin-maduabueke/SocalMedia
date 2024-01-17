@@ -1,0 +1,351 @@
+@charset "utf-8";
+/* CSS Document */
+
+#mainPageContentArea
+{
+	min-height:850px;
+	height:auto;
+	background-color:#FFF;
+	box-shadow:2px 2px 7px #000;
+	-moz-box-shadow:2px 2px 7px #000;
+	-webkit-box-shadow:2px 2px 7px #000;
+	-o-box-shadow:2px 2px 7px #000;
+	-khtml-box-shadow:2px 2px 7px #000;
+	-ms-box-shadow:2px 2px 7px #000;
+}
+#mainLeftCol
+{
+	width:191px;
+	min-height:865px;
+	height:auto;
+	float:left;
+	margin-left:10px;
+}
+#mainRightCol
+{
+	width:722px;
+	min-height:865px;
+	height:auto;
+	float:left;
+	border-left:1px solid #F0F0F0;
+	background-color:#FFF;
+	margin-left:13px;
+}
+#controlpanelholder div.controlitem
+{
+	height:28px;
+	border-bottom:1px dotted #CCC;
+	margin-bottom:9px;
+	font-family:sitefont, Verdana;
+	font-weight:bold;
+}
+#controlpanelholder div.controlitem img, div.controlitemlabel
+{
+	float:left;
+}
+#controlpanelholder div.controlitem img
+{
+	width:20px;
+	height:20px;
+	margin-right:10px;
+}
+#controlpanelholder div.controlitem div.controlitemlabel
+{
+	color:#FFCC33;
+	font-size:13px;
+	font-weight:bold;
+	margin-top:3px;
+}
+#controlpanelholder div.controlitem div.controlitemlabel a
+{
+	color:#007DB8;
+	font-size:13px;
+	font-weight:bold;
+	text-decoration:none;
+}
+#controlpanelholder div.controlitem div.controlitemlabel a:hover
+{
+	text-decoration:underline;
+}
+div.peekerholder
+{
+	height:68px;
+	margin-bottom:10px;
+	border-bottom:1px solid #CCCCCC;
+}
+div.peekeravatarholder
+{
+	float:left;
+	width:60px;
+	height:57px;
+	border:1px solid #F0F0F0;
+	overflow:hidden;
+	-ms-overflow:hidden;
+}
+div.peekeravatarholder img
+{
+	width:54px;
+	height:51px;
+	margin-top:3px;
+}
+div.peekerdetailsholder
+{
+	float:right;
+	width:118px;
+	min-height:55px;
+	text-align:left;
+}
+div.peekerdetailsholder label
+{
+	font-size:13px;
+	color:#000;
+	font-weight:bold;
+}
+div#membershortprofileholder
+{
+	min-height:60px;
+	margin-top:8px;
+}
+div#memshortavatar
+{
+	float:left;
+	width:58px;
+	height:60px;
+	border:1px solid #F0F0F0;
+	overflow:hidden;
+	-ms-overflow:hidden;
+}
+div#memshortavatar img
+{
+	margin-top:4px;
+}
+div#memshortdetails
+{
+	float:right;
+	width:123px;
+	height:60px;
+	text-align:left;
+	font-size:11px;
+	font-weight:bold;
+	color:#007DB8;
+}
+div#rightcolcontentholder
+{
+	width:710px;
+	min-height:775px;
+	height:auto;
+	padding-left:10px;
+}
+div#mainRightCol #rightcolheading
+{
+	width:675px;
+	height:57px;
+	border-bottom:1px solid #F0F0F0;
+}
+div#mainRightCol #rightcolheading #rightcoldescription
+{
+	float:left;
+	width:360px;
+	height:35px;
+	font-size:26px;
+	font-weight:bold;
+	text-align:left;
+	margin-top:18px;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	overflow:hidden;
+}
+div#mainRightCol #rightcolheading #rightcoltoolsholder
+{
+	float:right;
+	width:250px;
+	height:35px;
+	font-size:26px;
+	font-weight:bold;
+	text-align:left;
+	margin-top:18px;
+	text-align:right;
+}
+div#mainRightCol #rightcolheading #rightcoltoolsholder div.toolcontrolholder
+{
+	min-width:109px;
+	width:auto;
+	/*background-color:#000;*/
+}
+div#mainRightCol #rightcolheading #rightcoltoolsholder div.toolcontrolholder div.toolcontrolitem
+{
+	min-width:115px; width:auto;
+	float:right;
+}
+div#mainRightCol #rightcolheading #rightcoltoolsholder div.toolcontrolholder div.toolcontrolitem div.toolcontrolitemiconholder
+{
+	float:left; width:auto; height:auto; margin-right:5px;
+}
+div#mainRightCol #rightcolheading #rightcoltoolsholder div.toolcontrolholder div.toolcontrolitem div.toolcontrolitemiconholder img
+{
+	
+}
+div#mainRightCol #rightcolheading #rightcoltoolsholder div.toolcontrolholder div.toolcontrolitem div.toolcontrolitemlinkholder
+{
+	margin-top:10px;
+	float:left; width:auto; height:auto;
+}
+div#mainRightCol #rightcolheading #rightcoltoolsholder div.toolcontrolholder div.toolcontrolitem a
+{
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:underline;
+	color:#007DB8;
+}
+div#mainRightCol #rightcolheading #rightcoltoolsholder div.toolcontrolholder div.toolcontrolitem label
+{
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+	color:#007DB8;
+}
+div#mempageheadercontrolsholder
+{
+	height:36px;
+	margin-top:39px;
+}
+div.mphcontrol
+{
+	min-width:104px;
+	width:auto;
+	height:inherit;
+	/*background-color:#005680;*/
+	float:left;
+	margin-left:5px;
+	border-left:1px dotted #B30059;
+	border-right:1px dotted #B30059;
+}
+div.mphcontrol:hover
+{
+	/*background-color:#005C88;*/
+	background-color:#B30059;
+}
+div.mphcontrol div.mphclabel
+{
+	margin-top:12px;
+	font-size:13px;
+	/*font-weight:bold;*/
+	color:#FFF;
+}
+div.mphcontrol div.mphclabel a
+{
+	font-size:13px;
+	/*font-weight:bold;*/
+	color:#FFF;
+	text-decoration:none;
+	display:block;
+}
+div.mphctrltotalsummary
+{
+	position:absolute;
+	background-color:#ED0202;
+	min-width:20px;
+	width:auto;
+	display:none;
+}
+div.mphctrltotalsummary div
+{
+	font-size:11px;
+	color:#FFF;
+	font-weight:bold;
+	padding:3px 5px 3px 5px;
+}
+div.dropdownoptionavailableicon
+{
+	height:6px;
+}
+div.dropdownoptionavailableicon div.activespot
+{
+	width:6px;
+	height:6px;
+	float:right;
+	background-color:#98AD2A;
+	margin-right:3px;
+}
+div.mphctrldropdown
+{
+	position:absolute;
+	background-color:#FFF;
+	width:196px;
+	min-height:10px;
+	height:auto;
+	display:none;
+	border:1px solid #CCC;
+	padding-top:5px;
+	box-shadow:1px 1px 4px #000;
+	-moz-box-shadow:1px 1px 4px #000;
+	-webkit-box-shadow:1px 1px 4px #000;
+	-khtml-box-shadow:1px 1px 4px #000;
+	-o-box-shadow:1px 1px 4px #000;
+	-ms-box-shadow:1px 1px 4px #000;
+	z-index:5;
+}
+div.mphcdropitem
+{
+	width:190px;
+	height:30px;
+	border-bottom:1px solid #F0F0F0;
+	margin-bottom:5px;
+	font-size:13px;
+	color:#005680;
+}
+div.mphcdropitemimage
+{
+	float:left;
+	width:25px;
+	height:25px;
+}
+div.mphcdropitemlabel
+{
+	float:right;
+	text-align:left;
+	width:156px;
+	font-size:13px;
+	color:#005680;
+	margin-top:5px;
+}
+div.mphcdropitemlabel a
+{
+	font-size:13px;
+	color:#005680;
+	text-decoration:none;
+}
+#sitetoolspanelholder
+{
+	min-width:100px;
+	width:auto;
+	height:40px;
+	background-color:#B5AE97;
+	border-radius:20px 20px 0px 0px;
+	-webkit-border-radius:20px 20px 0px 0px;
+	-moz-border-radius:20px 20px 0px 0px;
+	-khtml-border-radius:20px 20px 0px 0px;
+	-o-border-radius:20px 20px 0px 0px;
+	-ms-border-radius:20px 20px 0px 0px;
+	border:1px solid #B3AD95;
+	background-image:url(../chatplugin/images/toolsbg.jpg);
+	overflow:hidden;
+}
+#sitetoolspanelholder div.basetoolsitem
+{
+	height:inherit;
+	width:52px;
+	float:right;
+	border-left:1px inset #ADA68C;
+	border-right:1px solid #D0CCBD;
+	color:#333333; 
+}
+#sitetoolspanelholder div.basetoolsitem:hover
+{
+	background-color:#5E5C57;
+	border-right:1px solid #5E5C57;
+}
+#sitetoolspanelholder div.basetoolsitemActive
+{
+	background-color:#141414;
+	border-right:1px solid #5E5C57;
+}

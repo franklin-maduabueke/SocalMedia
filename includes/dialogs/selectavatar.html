@@ -1,0 +1,236 @@
+<!--********************************************************************
+* No part of this work may be used in part or whole without the prior
+* written consent of the author.
+* Author: Franklin N. Maduabueke
+* Email: dueal21@yahoo.co.uk
+* The year is 2012
+*********************************************************************-->
+<div id="dlgSelectAvatarHolder" align="center" class="jdWebDialogWidget">
+	<div id="dlgheading">
+    	<div id="dlgtitle">SELECT YOUR AVATAR</div>
+        <div id="dlgclosebtn" class="clickable"><img src="../images/dlgclosebtn.png" /></div>
+        <div style="clear:both"></div>
+    </div>
+     <div style="clear:both"></div>
+    <div id="dlgbody">
+    	<div id="avatarcollection">
+            <div class="avatarsampleiconholder">
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+    <div id="dlgcontentbound">
+        <div style="height:5px"></div>
+        <div id="dlgcontrolsholder">
+            <div id="dlgmaincontrols">
+                <select id="uploadedfilecollection" style="display:none;"></select>
+                <div style="height:10px;"></div>
+                <div style="text-align:left;">
+                    <div style="color:#000; font-size:12px; font-weight:bold;">File name: <label id="fileuploadedname"></label></div>
+                    <label style="color:#333333; font-size:15px; text-shadow:1px 1px 2px #FFF; display:none;" id="albumnamechoicelabel"></label>
+                    <label style="width:212px; height:25px; display:none;" id="uploadfilesname"></label>
+                </div>
+                <div style="text-align:right; margin-top:10px;">
+                    <img src="../images/addbtn.png" class="clickable" id="addphotofileBtn" />
+                    <img src="../images/cancelbtn.png" class="clickable" id="clearphotofilesBtn" />
+                    <img src="../images/okbtn.png" class="clickable" id="uploadalbumPhotoSubmitBtn" />
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+    
+    <div style="width:1px; height:1px; overflow:hidden;">
+		<form method="post" action="../processing/editprofilepic.php" target="editProfilePicProcessingIframe" enctype="multipart/form-data" id="uploadavatarform">
+        	<input type="hidden" name="uploadtype" value="imgfile" />
+            <input type="hidden" name="avatargenid" value="" />
+			<!-- dynamic create file elements -->
+			<iframe src="../processing/editprofilepic.php" name="editProfilePicProcessingIframe" style="display:none">
+			</iframe>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	//intialization function for dialog
+	function jdSelectAvatarDialogInit()
+	{
+		//set position
+		var windowWidth = $(window).width();
+		var windowHeight = $(window).height();
+		var dlg = $('#dlgSelectAvatarHolder');
+		var dlgWidth = dlg.width();
+		var dlgHeight = dlg.height();
+		var top = Math.ceil((windowHeight / 2) - (dlgHeight / 2)) + 'px';
+		var left = Math.ceil((windowWidth / 2) - (dlgWidth / 2)) + 'px';
+		
+		$('#dlgSelectAvatarHolder').css({
+									   'position': 'fixed',
+									   'top': top,
+									   'left': left,
+									   'z-index': 10
+									   });
+		
+		//get avatars from server
+		$.getJSON('../processing/selectavatarfetch.php',
+				  function (json)
+				  {
+					  if (json.success)
+					  {
+						  //alert("Avatars found");
+						  var collectionpanel = $('#dlgSelectAvatarHolder #avatarcollection');
+						  
+						  for (avatar in json)
+						  {
+							  if (avatar != "success")
+							  {
+								  var avatarDef = '<div class="avatarsampleiconholder"><img src="../processing/fetchavatarpic.php?genid=' + avatar.genid + '" /><input type="hidden" value="' + avatar.name + '" class="avatarnametxt" /><input type="hidden" value="' + avatar.genid + '" /></div>';
+								  collectionpanel.prepend(avatarDef);
+							  }
+						  }
+					  }
+					  else
+					  {
+						  //alert("No avatars");
+						  //hide the body
+						  $('#dlgSelectAvatarHolder #dlgbody').slideUp('fast');
+					  }
+				  });
+	}
+	
+	$('#dlgclosebtn').click( function () {
+								$('body').data('DialogManager').hideDialog("selectavatar");
+								hidePopper();
+	});
+	
+	$('#addphotofileBtn').click( function () {
+								  $(this).css('visibility', 'hidden');
+								  $('#clearphotofilesBtn').css('visibility', 'hidden');
+								  $('#uploadalbumPhotoSubmitBtn').css('visibility', 'hidden');
+								  
+								  //add file object
+								  var fileobjcount =  $('#uploadavatarform input[type=file]').length;
+								  if (fileobjcount == 0)
+								  {
+									  var fileObjDef = '<input type="file" name="avatarphotofile[]" id="file' + fileobjcount + '" style="visibility:visible;" />';
+									 
+									  $('#uploadavatarform').append(fileObjDef);
+								  }
+								  
+								  var fileobj = $('#uploadavatarform input[type=file]:last');
+								  alert("Please select image file(s) only.");
+								  fileobj.change( function () {
+								  		if ($(this).val().length)
+										{
+											var filename = $(this).val();
+											if ((pos = filename.lastIndexOf("\\")) != -1)
+											{
+												filename = filename.substr(pos + 1);
+											}
+											
+											$('#fileuploadedname').text(filename);
+											
+											$('#uploadedfilecollection').append('<option value="' + filename + '#op' + fileobjcount + '"">' + filename + '</option>');
+											
+											$('#uploadedforalbumcount div a').text(fileobjcount + 1);
+										}
+										//increase count for file selected for upload
+								  });
+								  
+								  fileobj.click();
+								  $(this).css('visibility', 'visible');
+								  $('#clearphotofilesBtn').css('visibility', 'visible');
+								  $('#uploadalbumPhotoSubmitBtn').css('visibility', 'visible');
+	});
+	
+	//clear the collection of selected files for uploading
+	$('#clearphotofilesBtn').click(function () {
+			$(this).css('visibility', 'hidden');
+			$('#uploadalbumPhotoSubmitBtn').css('visibility', 'hidden');
+			
+			if ($('#uploadavatarform input[type=file]').length && confirm("Do you want to remove all selected files?"))
+			{
+				 $('#uploadavatarform input[type=file]').remove();
+				 $('#uploadedfilecollection option').remove();
+				 /*$('#uploadedforalbumcount div a').text('n');*/
+				 $('#fileuploadedname').text('');
+			}
+			
+			$(this).css('visibility', 'visible');
+			$('#uploadalbumPhotoSubmitBtn').css('visibility', 'visible');
+	});
+	
+	//sequentially submits files selected for upload to the server
+	//can make a progress bar using this
+	$('#uploadalbumPhotoSubmitBtn').click(function () {
+			if ($('#uploadavatarform input[type=file]').length && confirm("Do you want to upload?"))
+			{
+				$(this).css('visibility', 'hidden');
+				$('#clearphotofilesBtn').css('visibility', 'hidden');
+				$('#addphotofileBtn').css('visibility', 'hidden');
+				
+				 //upload sequentially and provide a progress bar.
+				 $('body').data('GalleryUploadFiles', $('#uploadavatarform input[type=file]'));
+				 $('#uploadavatarform input[type=file]').remove();
+				 
+				 var filecount =  $('body').data('GalleryUploadFiles').length;
+				 $('#uploadavatarform').append($('body').data('GalleryUploadFiles')[0]);
+				 
+				 $('body').data('GalleryUploadFilesTotal', filecount);
+				 $('body').data('GalleryUploadFiles', $('body').data('GalleryUploadFiles').slice(1));
+																									
+				 $('iframe[name=editProfilePicProcessingIframe]').load( function () {
+						if ($('body').data('GalleryUploadFiles').length > 0)
+						{
+							var filecount =  $('body').data('GalleryUploadFiles').length;
+							$('#uploadavatarform input[type=file]').remove();
+							$('#uploadavatarform').append($('body').data('GalleryUploadFiles')[0]);
+							
+							$('body').data('GalleryUploadFiles', $('body').data('GalleryUploadFiles').slice(1));
+							var totalcount = $('body').data('GalleryUploadFilesTotal');
+							var percentUploaded = Math.ceil(((totalcount - filecount) / totalcount) * 100);
+							
+							$('#gphotouploadProgresssIndicator').text('Uploading: Progress ' + percentUploaded + '%');
+							$('#uploadavatarform').submit();
+						}
+						else
+						{
+							//alert("Complete");
+							$('#dlgclosebtn').click();
+							$('#uploadphototoalbumlink').css('display', 'block');
+				 			$('#gphotouploadProgresssIndicator').css('display', 'none');
+							
+							//do ajax reload of gallery images here.
+							//window.location.reload();
+							$('#userprofileimageholder img').remove();
+							$('#userprofileimageholder').append('<img src="../processing/fetchmemberpic.php?h=200&w=200&q=75&respect=true" />');
+						}
+				 });
+				 
+				 hidePopper();
+				 $('#dlgSelectAvatarHolder').css('visibility', 'hidden');
+				 
+				 //$('#uploadphototoalbumlink').css('display', 'none');
+				 //$('#gphotouploadProgresssIndicator').css('display', 'block').text('Uploading: Progress 0%');
+				 //show loading gif in the current images place.
+				 $('#userprofileimageholder').data('CurrentImage', $('#userprofileimageholder img'))
+				 $('#userprofileimageholder img').remove();
+				 $('#userprofileimageholder').append('<img src="../images/lightbox-ico-loading.gif" style="width:auto; height:auto;" id="loadinggifanimation" />'); 
+				 //position central
+				 $('#loadinggifanimation').load( function () {
+						var pHeight = $(this).parent().height();
+						$(this).css({
+									'margin-top':(pHeight / 2) - ($(this).height() / 2) + 'px'
+									});
+				 });
+				 
+				 $('#uploadavatarform').submit();
+			}
+	});
+	
+	$('body').data("jdSelectAvatarDialogScript", 
+				   {"init": jdSelectAvatarDialogInit //initialization for the dialog
+				   });
+	
+	$('body').data("jdSelectAvatarDialogScript").init();
+</script>

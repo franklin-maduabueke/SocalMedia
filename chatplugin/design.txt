@@ -1,0 +1,9 @@
+DESIGN DOCUMENT
+---------------
+
+INSTRUCTION FOR INSTALLATION
+----------------------------
+Place the Processing and Modules directory of chat plugin in subdomain (http://www.chatinterface.iwanshokoto.com)
+this will increase performance of the chat experience.
+
+Every other thing should reside in the sites main domain.

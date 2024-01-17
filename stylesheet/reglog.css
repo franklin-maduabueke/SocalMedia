@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* CSS Document */
+
+#reglogloginpanelleft
+{
+	width:320px;
+	height:500px;
+	background-color:#666;
+	float:left;
+}
+#reglogregpanelright
+{
+	width:600px;
+	height:800px;
+	float:right;
+	background-color:#333
+}

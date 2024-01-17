@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+
+#matches
+{
+}
+#matches div.matchitemholder
+{
+	width:138px;
+	height:188px;
+	float:left;
+	border:1px solid #CCC;
+	margin:0px 0px 14px 14px;
+}
+#matches div.matchitemholder #matchthumbnailholder
+{
+	width:125px;
+	height:148px;
+	background-color:#F0F0F0;
+	overflow:hidden;
+}
+#matches div.matchitemholder #matchdescription
+{
+	width:125px;
+	height:30px;
+	font-size:11px;
+	color:#007DB8;
+	font-family:Verdana, Geneva, sans-serif;
+	text-align:left;
+}
+#matchsearchpanel
+{
+	width:650px;
+	height:250px;
+	background-color:#FF9900;
+	border:3px solid #FFF;
+	box-shadow:0px 0px 3px #FFF;
+	-moz-box-shadow:0px 0px 3px #FFF;
+	-webkit-box-shadow:0px 0px 3px #FFF;
+	-khtml-box-shadow:0px 0px 3px #FFF;
+	-ms-box-shadow:0px 0px 3px #FFF;
+	-o-box-shadow:0px 0px 3px #FFF;
+	padding:5px;
+}
+#matchsearchpanel #mspanelheading
+{
+	text-align:left;
+	margin-bottom:10px;
+}
+#matchsearchpanel label
+{
+	color:#007DB8; font-weight:bold; font-size:15px;
+}
+#matchsearchpanel select,input
+{
+	border:1px solid #E62174;
+}
+#matchsearchpanel .mspanelcontrolholder label
+{
+	color:#007DB8; font-weight:bold; font-size:15px;
+}

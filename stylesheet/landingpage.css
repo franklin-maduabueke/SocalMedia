@@ -1,0 +1,102 @@
+@charset "utf-8";
+/* CSS Document */
+
+div.storyboardpanel
+{
+	width:675px;
+	height:auto;
+	padding-bottom:15px;
+	border-bottom:1px solid #F0F0F0;
+}
+div.storyboardpanel .storyboarditemactionholder
+{
+	color:#E62174;
+	font-size:11px;
+	font-weight:bold;
+}
+div.storyboardpanel .storyboarditemactionholder a
+{
+	color:#E62174;
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+}
+div.storyboardpanel .storyboarditemactionholder a:hover
+{
+	text-decoration:underline
+}
+div.storyboardpanel .storyboarditemactionholder label
+{
+	margin:0px 10px 0px 10px;
+}
+div.storyboardpanel #heading #hlabel
+{
+	float:left;
+	width:auto;
+	color:#007DB8;
+	font-size:13px;
+	font-weight:bold;
+}
+div.storyboardpanel .sbbaseactions
+{
+	color:#E62174;
+	font-size:11px;
+	font-weight:bold;
+	text-align:right;
+	margin-top:25px;
+}
+div.storyboardpanel .sbbaseactions label
+{
+	margin:0px 10px 0px 10px;
+}
+div.storyboardpanel .sbbaseactions a
+{
+	color:#E62174;
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+}
+div.storyboardpanel .sbbaseactions a:hover
+{
+	text-decoration:underline;
+}
+#incompleteprofilepanel
+{
+	width:663px;
+	height:90px;
+	background-color:#FFCC33;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-khtml-border-radius:10px;
+	-ms-border-radius:10px;
+	-o-border-radius:10px;
+	border:1px solid #FFC20D;
+	background-image:url(../images/indexnotibg.jpg);
+	margin-bottom:20px;
+}
+#incompleteprofilepanel #description
+{
+	float:left;
+	width:560px;
+	height:62px;
+	margin-left:15px;
+	color:#000;
+	font-size:15px;
+	text-align:left;
+}
+#peoplelikelistpanel div.personcontentholder
+{
+	float:left;
+	width:110px;
+	height:156px;
+	margin-left:20px;
+	margin-bottom:20px;
+}
+#peoplelikelistpanel div.personcontentholder #thumbnailholder
+{
+	height:104px;
+	background-color:#FFF;
+	overflow:hidden;
+	-ms-overflow:hidden;
+}

@@ -1,0 +1,13 @@
+/* CSS Document */
+
+#popper
+{
+	z-index:5;
+	position:absolute;
+	top:0px;
+	left:0px;
+	border:0px;
+	background-color:#000; /*#FF6600*/
+	/*color:#FFFFFF;*/
+	display:none;
+}

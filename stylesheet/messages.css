@@ -1,0 +1,108 @@
+@charset "utf-8";
+/* CSS Document */
+
+#messagesdirtoolbox
+{
+	width:675px;
+	height:40px;
+	background-color:#D7D7D7;
+	overflow:hidden;
+	margin-bottom:35px;
+}
+#messagesdirtoolbox div.controltab
+{
+	float:left;
+	width:115px;
+	height:40px;
+	background-color:#FFF;
+	margin-left:5px;
+	margin-top:5px;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-khtml-border-radius:5px;
+	-ms-border-radius:5px;
+	-o-border-radius:5px;
+}
+#messagesdirtoolbox div.controltab #label
+{
+	font-size:13px;
+	color:#007DB8;
+	font-weight:bold;
+}
+#messagesdirtoolbox div.controltab #label a
+{
+	font-size:13px;
+	color:#007DB8;
+	font-weight:bold;
+	text-decoration:none;
+	display:block;
+}
+div.messagespanel
+{
+	width:675px;
+	min-height:115px;
+	height:auto;
+	border-bottom:1px solid #F0F0F0;
+	margin-bottom:18px;
+}
+div.messagespanel #thumbnailholder
+{
+	width:108px;
+	height:115px;
+	float:left;
+	border:1px solid #F0F0F0;
+}
+div.messagespanel #thumbnailholder #thumnailimgholder
+{
+	width:98px;
+	height:104px;
+	background-color:#F0F0F0;
+	overflow:hidden;
+	-ms-overflow:hidden;
+}
+div.messagespanel #messagedescription
+{
+	float:left;
+	width:554px;
+	min-height:109px;
+	height:auto;
+	margin-left:10px;
+	text-align:left;
+}
+div.messagespanel #messagecontrols
+{
+	margin-top:20px;
+	color:#E62174;
+	font-size:13px;
+	font-weight:bold;
+	text-align:right;
+	margin-bottom:10px;
+}
+div.messagespanel #messagecontrols a
+{
+	height:30px;
+	margin-top:20px;
+	color:#E62174;
+	font-size:13px;
+	font-weight:bold;
+	text-decoration:none;
+	margin-left:20px;
+}
+div.messagespanel #messagecontrols a:hover
+{
+	/*text-decoration:underline;*/
+}
+div#replypaneltextholder
+{
+	height:60px;
+	border:1px solid #CCCCCC;
+	margin-bottom:10px;
+}
+div#replypaneltextholder textarea
+{
+	width:100%;
+	height:98%;
+	border:none;
+	outline:none;
+}

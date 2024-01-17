@@ -1,0 +1,44 @@
+-- phpMyAdmin SQL Dump
+-- version 2.9.2
+-- http://www.phpmyadmin.net
+-- 
+-- Host: localhost
+-- Generation Time: Jun 11, 2012 at 12:54 AM
+-- Server version: 5.0.33
+-- PHP Version: 5.2.1
+-- 
+-- Database: `iwanshokotodb`
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `member_profile`
+-- 
+
+DROP TABLE IF EXISTS `member_profile`;
+CREATE TABLE `member_profile` (
+  `MTID` int(11) NOT NULL auto_increment,
+  `MemGenID` varchar(20) collate latin1_general_ci NOT NULL,
+  `FullName` varchar(200) collate latin1_general_ci default NULL,
+  `DOB` date default NULL,
+  `Gender` enum('MALE','FEMALE') collate latin1_general_ci NOT NULL,
+  `Email` varchar(60) collate latin1_general_ci NOT NULL,
+  `AccountActivated` tinyint(4) NOT NULL default '0' COMMENT 'Activation by email to avoid scripts registration.',
+  `IntrestedIn` enum('MEN','WOMEN') collate latin1_general_ci NOT NULL,
+  `Location` int(11) NOT NULL,
+  `LookingFor` enum('Friendship','Relationship','Casual Affair','Quicky') collate latin1_general_ci default NULL,
+  `Hobby` varchar(5000) collate latin1_general_ci default NULL,
+  `Occupation` varchar(2000) collate latin1_general_ci default NULL,
+  `Relationship` enum('Single','Dating','Married') collate latin1_general_ci default NULL,
+  `Height` varchar(20) collate latin1_general_ci default NULL,
+  `FavQuotes` varchar(5000) collate latin1_general_ci default NULL,
+  `ChoiceOfMovies` varchar(500) collate latin1_general_ci default NULL,
+  `ChoiceOfMusic` varchar(500) collate latin1_general_ci default NULL,
+  `AboutMe` varchar(1000) collate latin1_general_ci default NULL,
+  `BiggestAsset` varchar(500) collate latin1_general_ci default NULL,
+  `MyFairyTaleRomance` varchar(1000) collate latin1_general_ci default NULL,
+  `Photo` mediumblob NOT NULL,
+  `PhotoFormat` varchar(7) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`MTID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;

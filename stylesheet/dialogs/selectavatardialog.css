@@ -1,0 +1,59 @@
+@charset "utf-8";
+/* CSS Document */
+
+#dlgSelectAvatarHolder
+{
+	width:540px;
+	padding-bottom:20px;
+	/*height:320px;*/
+	height:auto;
+	background-color:#FFF;
+	border-radius:15px;
+	-webkit-border-radius:15px;
+	-khtml-border-radius:15px;
+	-moz-border-radius:15px;
+	-o-border-radius:15px;
+	-ms-border-radius:15px;
+	overflow:hidden;
+	
+	box-shadow:1px 1px 3px #000;
+	-moz-box-shadow:1px 1px 3px #000;
+	-webkit-box-shadow:1px 1px 3px #000;
+	-khtml-box-shadow:1px 1px 3px #000;
+	-ms-box-shadow:1px 1px 3px #000;
+	-o-box-shadow:1px 1px 3px #000;
+}
+#dlgSelectAvatarHolder #dlgheading
+{
+	height:30px; width:95%;
+}
+#dlgSelectAvatarHolder #dlgheading #dlgtitle
+{
+	width:auto; height:auto; float:left; text-align:left; color:#000; font-size:15px; margin-top:7px;
+}
+#dlgSelectAvatarHolder #dlgheading #dlgclosebtn
+{
+	width:auto; height:auto; float:right;
+}
+#dlgSelectAvatarHolder #dlgbody
+{
+	width:511px;
+	height:170px;
+	background-color:#FFF;
+	/*background-color:#B9B7B8;
+	background-image:url(../../images/uploaddlgbg.jpg);*/
+	overflow-y:auto;
+}
+#dlgSelectAvatarHolder #dlgcontentbound
+{
+	width:485px;
+	min-height:160px;
+	height:auto;
+}
+#dlgSelectAvatarHolder div.avatarsampleiconholder
+{
+	width:75px;
+	height:75px;
+	background-color:#CCC;
+	float:left;
+}

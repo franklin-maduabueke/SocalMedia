@@ -1,0 +1,86 @@
+//remove handler for initialisation after startpoint made
+						//operations for drawing using the HTML5 canvas
+						/*
+						$('#paintAppCanvas').click( function (event) {
+															  canvasDefaultAspectRation = $('body').data('jdPaintAppScript').canvasDefaultAspectRation;
+															  canvasWidth = $(this).width();
+															  canvasHeight = $(this).height();
+															  
+															  //find divisor to ajust for aspect ration change / scaling of the canvas dimension so that
+															  //mouse clicks are drawn at exact point
+															  scaleWidthDivisor = canvasWidth > canvasDefaultAspectRation.w ? canvasWidth / canvasDefaultAspectRation.w : canvasDefaultAspectRation.w / canvasWidth;
+															  scaleHeightDivisor = canvasHeight > canvasDefaultAspectRation.h ? canvasHeight / canvasDefaultAspectRation.h : canvasDefaultAspectRation.h / canvasHeight;
+															  
+															  scaleWidthDivisor = Math.ceil(scaleWidthDivisor);
+															  scaleHeightDivisor = Math.ceil(scaleHeightDivisor);
+															  
+															  canvasCoordX = event.clientX - $('#paintAppCanvas').offset().left + $(document).scrollLeft();
+															  canvasCoordY = event.clientY - $('#paintAppCanvas').offset().top + $(document).scrollTop();
+															  
+															  if ($('body').data('jdPaintAppScript').activetoolData == null)
+															  {
+															  		$('body').data('jdPaintAppScript').activetoolData = {
+																  				'startPoint': {'x': canvasCoordX, 'y': canvasCoordY},
+																				'initfunc': function (event) {
+																								//alert("Placing start point");
+															  									//start point set
+															  									//set fill and stroke
+															  									$('body').data('jdPaintAppScript').canvas2dContext.fillStyle = '#000000';
+															  									$('body').data('jdPaintAppScript').canvas2dContext.strokeStyle = '#000000';
+																								$('body').data('jdPaintAppScript').canvas2dContext.lineWidth = 2;
+																								$('body').data('jdPaintAppScript').canvas2dContext.lineJoin = 'round';
+															  									//context previously set
+															  									$('body').data('jdPaintAppScript').canvas2dContext.beginPath(); //start drawing.
+															  									$('body').data('jdPaintAppScript').canvas2dContext.moveTo(Math.ceil(canvasCoordX / scaleWidthDivisor), Math.ceil(canvasCoordY / scaleHeightDivisor));
+															  								}
+															  					};
+																				
+																	$('body').data('jdPaintAppScript').activetoolData.initfunc(event); //call to initialize.
+																	return;
+															  }
+															  
+															  //alert("Drawing line");
+															  //context previously set
+															  try
+															  {
+															  	//check if we are close to the start to end drawing using circle collision detection
+															  	var pointXDiff = $('body').data('jdPaintAppScript').activetoolData.startPoint.x - canvasCoordX; //make positive.
+															  	var pointYDiff = $('body').data('jdPaintAppScript').activetoolData.startPoint.y - canvasCoordY; //make positive
+															  
+															  	//alert("Start points (" +  $('body').data('jdPaintAppScript').activetoolData.startPoint.x + ',' + $('body').data('jdPaintAppScript').activetoolData.startPoint.y + ') Canvas coord (' + canvasCoordX + ', ' + canvasCoordY + ')');
+															  
+															  	if (pointXDiff < 0) pointXDiff = -1 * pointXDiff;
+															  	if (pointYDiff < 0) pointYDiff = -1 * pointYDiff;
+															  
+															  	//alert('Points x = ' + pointXDiff + ' , y = ' + pointYDiff);
+															  	distanceBtwPoints = Math.sqrt((pointXDiff * pointXDiff) + (pointYDiff * pointYDiff));
+															  	radius = 10;
+																
+															  	//alert('distance = ' + distanceBtwPoints);
+																
+															  	if (distanceBtwPoints <= radius * 2)
+															  	{
+																  	//end the drawing process.
+																  	//alert('Closing path ' + distanceBtwPoints);
+																  	$('body').data('jdPaintAppScript').canvas2dContext.closePath();
+																  	$('body').data('jdPaintAppScript').canvas2dContext.fill();
+																   	$('body').data('jdPaintAppScript').canvas2dContext.stroke();
+																   
+																  	$($('body').data('jdPaintAppScript').activetool).removeClass('jdPaintAppControlButtonActivated');
+																  	$('body').data('jdPaintAppScript').activetool = null;
+																  	$('body').data('jdPaintAppScript').activetoolData = null;
+																  
+																  	$(this).unbind('click');
+															  	}
+															  	else
+															  	{
+																  	//alert('adding line segment from ' + $('body').data('jdPaintAppScript').activetoolData.startPoint.x + ', ' + $('body').data('jdPaintAppScript').activetoolData.startPoint.y + ' to ' + canvasCoordX + ' , ' + canvasCoordY);
+															  		$('body').data('jdPaintAppScript').canvas2dContext.lineTo(Math.ceil(canvasCoordX / scaleWidthDivisor), Math.ceil(canvasCoordY / scaleHeightDivisor));
+																	$('body').data('jdPaintAppScript').canvas2dContext.stroke();
+															  	}
+															  }
+															  catch (e)
+															  {
+																  alert("Exception occured " + e.message);
+															  }
+						});*/
